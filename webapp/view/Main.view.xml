@@ -1,14 +1,73 @@
 <mvc:View
     controllerName="helloworld.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
+	xmlns:t="sap.ui.table"
+	xmlns:c="sap.ui.core"
     displayBlock="true"
     xmlns="sap.m"
+	c:require="{
+      statusIconFormatter: 'helloworld/model/formatter/statusIcon'
+    }"
 >
 	<Shell id="shell">
 		<App id="app">
 			<pages>
-				<Page id="page" title="{i18n>title}">
-					<content />
+				<Page
+					title="{i18n>appTitle}"
+					enableScrolling="false"
+				>
+					<content>
+						<t:Table
+							rows="{/HelloWorldSet}"
+							rowHeight="30"
+							visibleRowCountMode="Auto"
+							alternateRowColors="true"
+							selectionBehavior="RowOnly"
+						>
+							<t:rowSettingsTemplate>
+								<t:RowSettings
+									highlight="{
+										path: 'Status',
+										formatter: '.formatter.highlightColor'	
+									}"
+								/>
+							</t:rowSettingsTemplate>
+							<t:columns>
+								<t:Column
+									width="4rem"
+									hAlign="Center"
+								>
+									<Label text="{i18n>Status}"/>
+									<t:template>
+										<c:Icon
+											src="{
+												path: 'Status',
+												formatter: 'statusIconFormatter'	
+											}"
+										/>
+									</t:template>
+								</t:Column>
+								<t:Column
+									width="5rem"
+									hAlign="Center"
+								>
+									<Label text="{i18n>Process}"/>
+									<t:template>
+										<Text
+											text="{Id}"
+											wrapping="false"
+										/>
+									</t:template>
+								</t:Column>
+								<t:Column>
+									<Label text="{i18n>Date}"/>
+									<t:template>
+										<Text text="{Fecha}" wrapping="false" />
+									</t:template>
+								</t:Column>
+							</t:columns>
+						</t:Table>
+					</content>
 				</Page>
 			</pages>
 		</App>
