@@ -1,0 +1,30 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module"
+  },
+  "globals": {
+    "sap": true,
+    "jQuery": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "max-len": [ "error", {
+        "code": 80,
+        "ignoreUrls": true,
+        "ignoreComments": true
+      }
+    ],
+    "strict": [
+      "error",
+      "function"
+    ]
+  }
+}

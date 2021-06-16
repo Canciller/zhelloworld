@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: '1.0'
+metadata:
+  name: 'helloworld'
+type: application
+ui5Theme: sap_fiori_3_dark
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: https://s420sbx.bikey.com.mx
+          client: "500"
+        app:
+          name: ZHELLOWORLD
+          description: Hello World
+          package: $TMP
+          transport: ""
