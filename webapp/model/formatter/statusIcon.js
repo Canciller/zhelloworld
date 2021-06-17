@@ -21,7 +21,7 @@ sap.ui.define([], function () {
         break;
       case 'W':
         icon = 'sap-icon://message-warning';
-        color = 'yellow';
+        color = 'orange';
         break;
     }
 

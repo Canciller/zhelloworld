@@ -1,14 +1,30 @@
 sap.ui.define(
-  ['sap/ui/core/mvc/Controller', 'sap/ui/core/format/DateFormat'],
+  [
+    'sap/ui/core/mvc/Controller',
+    'sap/ui/core/format/DateFormat',
+    'sap/ui/model/json/JSONModel',
+  ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
    * @param {typeof sap.ui.core.format.DateFormat} DateFormat
+   * @param {typeof sap.ui.model.json.JSONModel} JSONModel
    */
-  function (Controller, DateFormat) {
+  function (Controller, DateFormat, JSONModel) {
     // Create DateFormat instance
     const oDateFormat = DateFormat.getDateInstance({
       pattern: 'MM/dd/yyyy',
     });
+
+    // Create DateTimeFormat instance
+    const oDateTimeFormat = DateFormat.getDateTimeInstance({
+      pattern: 'MM/dd/yyyy hh:mm:ss a',
+    });
+
+    // Columnas: Process name
+    // Monitor de interfaces
+    // Master detail
+    // Doble clic, cargar detalle
+    // Otro controlador pasar id proceso
 
     return Controller.extend('helloworld.controller.Main', {
       formatter: {
@@ -18,6 +34,9 @@ sap.ui.define(
          */
         date: function (oDate) {
           return oDate ? oDateFormat.format(oDate) : null;
+        },
+        datetime: function (oDate) {
+          return oDate ? oDateTimeFormat.format(oDate) : null;
         },
         /**
          * @param {string} sStatus
@@ -38,11 +57,28 @@ sap.ui.define(
           }
         },
       },
+      /**
+       * Initialize
+       */
+      onInit: function () {
+        this.oModel = new JSONModel({
+          last_update_date: new Date(),
+        });
+
+        this.getView().setModel(this.oModel, 'main');
+      },
+      /**
+       * @returns Table view
+       */
       getTable: function () {
         return this.byId('table');
       },
+      /**
+       * Refresh table data
+       */
       onRefresh: function () {
         this.getTable().getBinding().refresh(true);
+        this.oModel.setProperty('/last_update_date', new Date());
       },
     });
   }

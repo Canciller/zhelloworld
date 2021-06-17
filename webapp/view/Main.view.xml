@@ -23,7 +23,7 @@
 								path: '/HelloWorldSet',
 								parameters: { operationMode: 'Server' },
 								sorter: {
-									path: 'Fecha',
+									path: 'date',
 									descending: true
 								}
 							}"
@@ -35,18 +35,25 @@
 							<t:rowSettingsTemplate>
 								<t:RowSettings
 									highlight="{
-										path: 'Status',
+										path: 'status',
 										formatter: '.formatter.highlightColor'	
 									}"
 								/>
 							</t:rowSettingsTemplate>
 							<t:extension>
 								<OverflowToolbar style="Clear">
-								<ToolbarSpacer/>
-								<Button
-									icon="sap-icon://refresh"
-									tooltip="{i18n>Refresh}"
-									press=".onRefresh"/>
+									<Text text="{i18n>LastUpdateDate}" />
+									<Text
+										text="{
+											path: 'main>/last_update_date',
+											formatter: '.formatter.datetime'
+										}"
+									/>
+									<ToolbarSpacer/>
+									<Button
+										icon="sap-icon://refresh"
+										tooltip="{i18n>Refresh}"
+										press=".onRefresh"/>
 								</OverflowToolbar>
 							</t:extension>
 							<t:columns>
@@ -58,27 +65,39 @@
 									<t:template>
 										<c:Icon
 											src="{
-												path: 'Status',
+												path: 'status',
 												formatter: 'statusIconFormatter'	
 											}"
 										/>
 									</t:template>
 								</t:Column>
 								<t:Column
-									sortProperty="Id"
+									sortProperty="id"
 									width="5rem"
 									hAlign="Center"
 								>
-									<Label text="{i18n>Process}"/>
+									<Label text="{i18n>ID}"/>
 									<t:template>
 										<Text
-											text="{Id}"
+											text="{id}"
 											wrapping="false"
 										/>
 									</t:template>
 								</t:Column>
 								<t:Column
-									sortProperty="Fecha"
+									sortProperty="name"
+									width="5rem"
+								>
+									<Label text="{i18n>Process}"/>
+									<t:template>
+										<Text
+											text="{name}"
+											wrapping="false"
+										/>
+									</t:template>
+								</t:Column>
+								<t:Column
+									sortProperty="date"
 									sorted="true"
 									sortOrder="Descending"
 								>
@@ -86,7 +105,7 @@
 									<t:template>
 										<Text
 											text="{
-												path: 'Fecha',
+												path: 'date',
 												formatter: '.formatter.date'
 											}"
 											wrapping="false" />
