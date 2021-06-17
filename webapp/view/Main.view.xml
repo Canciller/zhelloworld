@@ -18,11 +18,19 @@
 				>
 					<content>
 						<t:Table
-							rows="{/HelloWorldSet}"
+							id="table"
+							rows="{
+								path: '/HelloWorldSet',
+								parameters: { operationMode: 'Server' },
+								sorter: {
+									path: 'Fecha',
+									descending: true
+								}
+							}"
 							rowHeight="30"
+							enableBusyIndicator="true"
 							visibleRowCountMode="Auto"
 							alternateRowColors="true"
-							selectionBehavior="RowOnly"
 						>
 							<t:rowSettingsTemplate>
 								<t:RowSettings
@@ -32,6 +40,15 @@
 									}"
 								/>
 							</t:rowSettingsTemplate>
+							<t:extension>
+								<OverflowToolbar style="Clear">
+								<ToolbarSpacer/>
+								<Button
+									icon="sap-icon://refresh"
+									tooltip="{i18n>Refresh}"
+									press=".onRefresh"/>
+								</OverflowToolbar>
+							</t:extension>
 							<t:columns>
 								<t:Column
 									width="4rem"
@@ -48,6 +65,7 @@
 									</t:template>
 								</t:Column>
 								<t:Column
+									sortProperty="Id"
 									width="5rem"
 									hAlign="Center"
 								>
@@ -59,10 +77,19 @@
 										/>
 									</t:template>
 								</t:Column>
-								<t:Column>
+								<t:Column
+									sortProperty="Fecha"
+									sorted="true"
+									sortOrder="Descending"
+								>
 									<Label text="{i18n>Date}"/>
 									<t:template>
-										<Text text="{Fecha}" wrapping="false" />
+										<Text
+											text="{
+												path: 'Fecha',
+												formatter: '.formatter.date'
+											}"
+											wrapping="false" />
 									</t:template>
 								</t:Column>
 							</t:columns>
