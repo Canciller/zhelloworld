@@ -1,13 +1,13 @@
 <mvc:View
-    controllerName="helloworld.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc"
+	controllerName="helloworld.controller.Main"
+	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:t="sap.ui.table"
 	xmlns:c="sap.ui.core"
-    displayBlock="true"
-    xmlns="sap.m"
+	displayBlock="true"
+	xmlns="sap.m"
 	c:require="{
-      statusIconFormatter: 'helloworld/model/formatter/statusIcon'
-    }"
+		statusIconFormatter: 'helloworld/model/formatter/statusIcon'
+	}"
 >
 	<Shell id="shell">
 		<App id="app">

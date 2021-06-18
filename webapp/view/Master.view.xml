@@ -1,0 +1,10 @@
+<mvc:View
+  controllerName="helloworld.controller.Master"
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:t="sap.ui.table"
+  xmlns:c="sap.ui.core"
+  c:require="{}"
+>
+</mvc:View>
