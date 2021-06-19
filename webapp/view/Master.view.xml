@@ -11,5 +11,99 @@
   displayBlock="true"
   height="100%"
 >
-  <Text text="Master" />
+	<t:Table
+    id="table"
+    rows="{
+      path: 'hello>/HelloWorldSet',
+      parameters: { operationMode: 'Server' },
+      sorter: {
+        path: 'date',
+        descending: true
+      }
+    }"
+    rowHeight="30"
+    enableBusyIndicator="true"
+    visibleRowCountMode="Auto"
+    alternateRowColors="true"
+    selectionBehavior="RowOnly"
+    selectionMode="Single"
+  >
+    <t:rowSettingsTemplate>
+      <t:RowSettings
+        highlight="{
+          path: 'hello>status',
+          formatter: 'rowHighlightFormatter'	
+        }"
+      />
+    </t:rowSettingsTemplate>
+    <t:extension>
+      <OverflowToolbar style="Clear">
+        <ToolbarSpacer/>
+        <Button
+          icon="sap-icon://refresh"
+          tooltip="{i18n>refresh}"
+          press=".onRefresh"/>
+      </OverflowToolbar>
+    </t:extension>
+    <t:columns>
+      <t:Column
+        width="4rem"
+        hAlign="Center"
+      >
+        <Label text="{i18n>status}"/>
+        <t:template>
+          <c:Icon
+            src="{
+              path: 'hello>status',
+              formatter: 'statusIconFormatter'	
+            }"
+          />
+        </t:template>
+      </t:Column>
+      <t:Column
+        sortProperty="id"
+        width="5rem"
+        hAlign="Center"
+      >
+        <Label text="{i18n>id}"/>
+        <t:template>
+          <Text
+            text="{hello>id}"
+            wrapping="false"
+          />
+        </t:template>
+      </t:Column>
+      <t:Column
+        sortProperty="name"
+        width="5rem"
+      >
+        <Label text="{i18n>name}"/>
+        <t:template>
+          <Text
+            text="{hello>name}"
+            wrapping="false"
+          />
+        </t:template>
+      </t:Column>
+      <t:Column
+        sortProperty="date"
+        sorted="true"
+        sortOrder="Descending"
+      >
+        <Label text="{i18n>date}"/>
+        <t:template>
+          <Text
+            text="{
+              path: 'hello>date',
+              type: 'sap.ui.model.type.Date',
+              formatOptions: {
+                pattern: 'MM/dd/yyyy'
+              }
+            }"
+            wrapping="false"
+          />
+        </t:template>
+      </t:Column>
+    </t:columns>
+  </t:Table>
 </mvc:View>
