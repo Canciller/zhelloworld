@@ -7,7 +7,16 @@
   xmlns:c="sap.ui.core"
   c:require="{}"
 >
-  <Text
-    text="Detail"
-  />
+  <Page
+    title="{hello>name}"
+  >
+    <content>
+      <Text
+        text="{hello>name}"
+      />
+      <Text
+        text="{hello>id}"
+      />
+    </content>
+  </Page>
 </mvc:View>

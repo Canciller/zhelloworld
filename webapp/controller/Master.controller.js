@@ -10,18 +10,44 @@ sap.ui.define(
       /**
        * Initialize
        */
-      onInit: function () {},
+      onInit: function () {
+        this.oRouter = this.getOwnerComponent().getRouter();
+      },
+
       /**
        * @returns Table element
        */
       getTable: function () {
         return this.byId('table');
       },
+
       /**
        * Refresh table callback
        */
       onRefresh: function () {
         this.getTable().getBinding().refresh(true);
+      },
+
+      /**
+       * Table cell click callback
+       * @param {sap.ui.base.Event} oEvent
+       */
+      onCellClick: function (oEvent) {
+        const oNextUIState = this.getOwnerComponent()
+          .getHelper()
+          .getNextUIState(1);
+
+        const oParameters = oEvent.getParameters(),
+          oContext = oParameters.rowBindingContext;
+
+        if (oContext) {
+          const oDetail = oContext.getObject();
+
+          this.oRouter.navTo('detail', {
+            id: oDetail.id,
+            layout: oNextUIState.layout,
+          });
+        }
       },
     });
   }

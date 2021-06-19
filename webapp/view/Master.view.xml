@@ -27,6 +27,7 @@
     alternateRowColors="true"
     selectionBehavior="RowOnly"
     selectionMode="Single"
+    cellClick=".onCellClick"
   >
     <t:rowSettingsTemplate>
       <t:RowSettings

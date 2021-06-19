@@ -8,8 +8,42 @@ sap.ui.define(
     return Controller.extend('helloworld.controller.Main', {
       /**
        * Initialize
+       * @override
        */
-      onInit: function () {},
+      onInit: function () {
+        this.oRouter = this.getOwnerComponent().getRouter();
+        this.oRouter.attachRouteMatched(this.onRouteMatched, this);
+      },
+
+      /**
+       * Exit
+       * @override
+       */
+      onExit: function () {
+        this.oRouter.detachRouteMatched(this.onRouteMatched, this);
+      },
+
+      onRouteMatched: function (oEvent) {
+        const sRouteName = oEvent.getParameter('name'),
+          oArguments = oEvent.getParameter('arguments');
+
+        this._updateUIElements();
+
+        // Save the current route name
+        this.currentRouteName = sRouteName;
+        this.currentProcess = oArguments.process;
+      },
+
+      /**
+       * Update the close/fullscreen buttons visibility
+       */
+      _updateUIElements: function () {
+        const oModel = this.getOwnerComponent().getModel();
+        const oUIState = this.getOwnerComponent()
+          .getHelper()
+          .getCurrentUIState();
+        oModel.setData(oUIState);
+      },
     });
   }
 );

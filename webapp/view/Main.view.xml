@@ -9,6 +9,8 @@
 	<m:App>
 		<FlexibleColumnLayout
 			id="fcl"
+			layout="{/layout}"
+			stateChange=".onStateChanged"
 		/>
 	</m:App>
 </mvc:View>

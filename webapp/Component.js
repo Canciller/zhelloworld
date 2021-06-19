@@ -34,8 +34,37 @@ sap.ui.define(
         // enable routing
         this.getRouter().initialize();
 
+        this.getRouter().attachRouteMatched(this.onRouteMatched, this);
+
         // set the device model
         this.setModel(models.createDeviceModel(), 'device');
+
+        this.setModel(new JSONModel());
+      },
+
+      exit: function () {
+        UIComponent.prototype.exit.apply(this, arguments);
+
+        this.oRouter.detachRouteMatched(this.onRouteMatched, this);
+      },
+
+      onRouteMatched: function (oEvent) {
+        const oModel = this.getModel();
+
+        let sLayout = oEvent.getParameters().arguments.layout;
+
+        // If there is no layout parameter, query for the default level 0 layout (normally OneColumn)
+        if (!sLayout) {
+          const oNextUIState = this.getOwnerComponent()
+            .getHelper()
+            .getNextUIState(0);
+          sLayout = oNextUIState.layout;
+        }
+
+        // Update the layout of the FlexibleColumnLayout
+        if (sLayout) {
+          oModel.setProperty('/layout', sLayout);
+        }
       },
 
       /**

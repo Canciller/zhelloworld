@@ -9,7 +9,24 @@ sap.ui.define(
       /**
        * Initialize
        */
-      onInit: function () {},
+      onInit: function () {
+        this.oRouter = this.getOwnerComponent().getRouter();
+        this.oModel = this.getOwnerComponent().getModel();
+
+        this.oRouter
+          .getRoute('detail')
+          .attachPatternMatched(this.onProcessMatched, this);
+      },
+
+      onProcessMatched: function (oEvent) {
+        this._process = oEvent.getParameter('arguments').id;
+
+        if (this._process) {
+          this.getView().bindElement({
+            path: 'hello>/HelloWorldSet(' + this._process + ')',
+          });
+        }
+      },
     });
   }
 );

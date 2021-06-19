@@ -92,14 +92,14 @@
       "routes": [
         {
           "name": "master",
-          "pattern": "",
+          "pattern": ":layout:",
           "target": [
             "master"
           ]
         },
         {
           "name": "detail",
-          "pattern": "process/{process}",
+          "pattern": "detail/{id}/{layout}",
           "target": [
             "master",
             "detail"
