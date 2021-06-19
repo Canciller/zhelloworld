@@ -1,16 +1,16 @@
 sap.ui.define([], function () {
   /**
    * Status icon formatter
-   * @param {string} sStatus - Status indicator
+   * @param {string} status - Status indicator
    * @returns Status icon
    */
-  function statusIcon(sStatus) {
-    if (!sStatus) return null;
+  function statusIcon(status) {
+    if (!status) return null;
 
     let icon = 'sap-icon://message-information',
       color = '#42b3f5';
 
-    switch (sStatus) {
+    switch (status) {
       case 'S':
         icon = 'sap-icon://message-success';
         color = 'green';

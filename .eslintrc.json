@@ -25,6 +25,7 @@
     "strict": [
       "error",
       "function"
-    ]
+    ],
+    "no-unused-vars": "warn"
   }
 }

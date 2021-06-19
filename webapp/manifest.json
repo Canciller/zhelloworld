@@ -40,19 +40,19 @@
   },
 
   "sap.ui5": {
-    "flexEnabled": false,
     "rootView": {
       "viewName": "helloworld.view.Main",
       "type": "XML",
       "async": true,
-      "id": "Main"
+      "id": "fcl"
     },
     "dependencies": {
       "minUI5Version": "1.66.0",
       "libs": {
         "sap.ui.core": {},
         "sap.m": {},
-        "sap.ui.layout": {}
+        "sap.ui.layout": {},
+        "sap.f": {}
       }
     },
     "contentDensities": {
@@ -66,7 +66,7 @@
           "bundleName": "helloworld.i18n.i18n"
         }
       },
-			"": {
+			"hello": {
 				"dataSource": "mainService",
 				"preload": true
 			}
@@ -80,28 +80,42 @@
     },
     "routing": {
       "config": {
-        "routerClass": "sap.m.routing.Router",
+        "routerClass": "sap.f.routing.Router",
         "viewType": "XML",
         "async": true,
         "viewPath": "helloworld.view",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "clearControlAggregation": false
+        "controlId": "fcl",
+        "transition": "slide",
+        "bypassed": {
+				}
       },
       "routes": [
         {
-          "name": "RouteMain",
-          "pattern": "RouteMain",
-          "target": ["TargetMain"]
+          "name": "master",
+          "pattern": "",
+          "target": [
+            "master"
+          ]
+        },
+        {
+          "name": "detail",
+          "pattern": "process/{process}",
+          "target": [
+            "master",
+            "detail"
+          ]
         }
       ],
       "targets": {
-        "TargetMain": {
+        "master": {
           "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "Main",
-          "viewName": "Main"
+          "viewName": "Master",
+          "controlAggregation": "beginColumnPages"
+        },
+        "detail": {
+          "viewType": "XML",
+          "viewName": "Detail",
+          "controlAggregation": "midColumnPages"
         }
       }
     }
