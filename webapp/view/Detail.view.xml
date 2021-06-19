@@ -8,15 +8,52 @@
   c:require="{}"
 >
   <Page
+    class="sapUiContentPadding sapUiResponsivePadding--header sapUiResponsivePadding--content"
     title="{hello>name}"
   >
+    <headerContent>
+			<Button 
+        icon="sap-icon://full-screen"
+        tooltip="Enter Full Screen Mode"
+        type="Transparent"
+        press="handleFullScreen"
+        visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"
+      />
+      <Button
+        icon="sap-icon://exit-full-screen"
+        tooltip="Exit Full Screen Mode"
+        type="Transparent"
+        press="handleExitFullScreen"
+        visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"
+      />
+      <Button 
+        icon="sap-icon://decline"
+        tooltip="Close Column"
+        type="Transparent"
+        press="handleClose"
+      />
+		</headerContent>
     <content>
-      <Text
-        text="{hello>name}"
-      />
-      <Text
-        text="{hello>id}"
-      />
+      <VBox>
+        <Text
+        text="{i18n>name}: {hello>name}"
+        />
+        <Text
+          text="{i18n>id}: {hello>id}"
+        />
+        <Text
+          text="{i18n>date}: {
+            path: 'hello>date',
+            type: 'sap.ui.model.type.Date',
+            formatOptions: {
+              pattern: 'MM/dd/yyyy'
+            }
+          }"
+        />
+        <Text
+          text="{i18n>status}: {hello>status}"
+        />
+      </VBox>
     </content>
   </Page>
 </mvc:View>

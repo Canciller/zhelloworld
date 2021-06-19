@@ -19,13 +19,43 @@ sap.ui.define(
       },
 
       onProcessMatched: function (oEvent) {
-        this._process = oEvent.getParameter('arguments').id;
+        this._processId = oEvent.getParameter('arguments').id;
 
-        if (this._process) {
+        if (this._processId) {
           this.getView().bindElement({
-            path: 'hello>/HelloWorldSet(' + this._process + ')',
+            path: 'hello>/HelloWorldSet(' + this._processId + ')',
           });
         }
+      },
+
+      handleFullScreen: function () {
+        var sNextLayout = this.oModel.getProperty(
+          '/actionButtonsInfo/midColumn/fullScreen'
+        );
+
+        this.oRouter.navTo('detail', {
+          layout: sNextLayout,
+          id: this._processId,
+        });
+      },
+
+      handleExitFullScreen: function () {
+        var sNextLayout = this.oModel.getProperty(
+          '/actionButtonsInfo/midColumn/exitFullScreen'
+        );
+
+        this.oRouter.navTo('detail', {
+          layout: sNextLayout,
+          id: this._processId,
+        });
+      },
+
+      handleClose: function () {
+        var sNextLayout = this.oModel.getProperty(
+          '/actionButtonsInfo/midColumn/closeColumn'
+        );
+
+        this.oRouter.navTo('master', { layout: sNextLayout });
       },
     });
   }

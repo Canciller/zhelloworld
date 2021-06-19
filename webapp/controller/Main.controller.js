@@ -31,7 +31,26 @@ sap.ui.define(
 
         // Save the current route name
         this.currentRouteName = sRouteName;
-        this.currentProcess = oArguments.process;
+        this.currentProcessId = oArguments.id;
+      },
+
+      onStateChanged: function (oEvent) {
+        var bIsNavigationArrow = oEvent.getParameter('isNavigationArrow'),
+          sLayout = oEvent.getParameter('layout');
+
+        this._updateUIElements();
+
+        // Replace the URL with the new layout if a navigation arrow was used
+        if (bIsNavigationArrow) {
+          this.oRouter.navTo(
+            this.currentRouteName,
+            {
+              layout: sLayout,
+              id: this.currentProcessId,
+            },
+            true
+          );
+        }
       },
 
       /**

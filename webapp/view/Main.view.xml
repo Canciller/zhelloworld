@@ -11,6 +11,7 @@
 			id="fcl"
 			layout="{/layout}"
 			stateChange=".onStateChanged"
+			backgroundDesign="Translucent"
 		/>
 	</m:App>
 </mvc:View>
